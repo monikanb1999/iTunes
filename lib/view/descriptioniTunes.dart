@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Model/iTunesSearchModel.dart';
 import 'package:flutter_application_1/viewModel/bloc/description_part/description_bloc.dart';
 import 'package:flutter_application_1/viewModel/bloc/description_part/description_event.dart';
 import 'package:flutter_application_1/viewModel/bloc/description_part/description_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:video_player/video_player.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class iTunesDescription extends StatefulWidget {
   final int? description;
@@ -50,31 +50,34 @@ class _iTunesDescriptionState extends State<iTunesDescription> {
 
   Widget loadingCenter() {
     return Center(
+        child: SizedBox(
+      height: MediaQuery.of(context).size.height * 0.07,
+      width: 200,
       child: Card(
         color: Color.fromARGB(255, 111, 109, 109), // Black card
         elevation: 8.0, // Elevation for shadow effect
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0), // Rounded corners
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0), // Padding inside the card
-          child: Row(
-            mainAxisSize: MainAxisSize.min, // Wraps the content tightly
-            children: [
-              SizedBox(height: 20), // Space between the GIF and text
-              Text(
-                'Loading...',
-                style: TextStyle(
-                  color: Colors.white, // White text color
-                  fontSize: 18.0, // Font size of the text
-                  fontWeight: FontWeight.bold,
-                ),
+
+        child: Row(
+          children: [
+            Spacer(),
+            SpinKitDoubleBounce(
+              color: Colors.white, // Color of the loading animation
+              size: 18, // Size of the loading animation
+            ),
+            Spacer(),
+            Text(
+              'Loading...',
+              style: TextStyle(
+                color: Colors.white, // White text color
+                fontSize: 18, // Font size of the text
+                fontWeight: FontWeight.bold,
               ),
-            ],
-          ),
+            ),
+            Spacer(),
+          ],
         ),
       ),
-    );
+    ));
   }
 
   @override
@@ -112,6 +115,7 @@ class _iTunesDescriptionState extends State<iTunesDescription> {
             }
             if (state is CollectionFetchLoaded) {
               return ListView(
+                shrinkWrap: true,
                 children: <Widget>[
                   Column(
                     children: <Widget>[
@@ -212,7 +216,7 @@ class _iTunesDescriptionState extends State<iTunesDescription> {
                       ),
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height * 0.7,
+                        height: MediaQuery.of(context).size.height * 2,
                         child: Card(
                           color: Colors.black,
                           elevation: 4,

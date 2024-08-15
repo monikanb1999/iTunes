@@ -4,6 +4,7 @@ import 'package:flutter_application_1/view/descriptioniTunes.dart';
 import 'package:flutter_application_1/viewModel/bloc/iTunesSearch/iTunesSearch_bloc.dart';
 import 'package:flutter_application_1/viewModel/bloc/iTunesSearch/iTunesSearch_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SetiTunesLayoutBuilderList extends StatefulWidget {
@@ -305,32 +306,30 @@ class _SetiTunesLayoutBuilderListState extends State<SetiTunesLayoutBuilderList>
 
   Widget loadingCenter() {
     return Center(
-        child: Card(
-      color: Color.fromARGB(255, 95, 94, 94), // Black card
-      elevation: 8.0, // Elevation for shadow effect
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0), // Rounded corners
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0), // Padding inside the card
+        child: SizedBox(
+      height: MediaQuery.of(context).size.height * 0.07,
+      width: 200,
+      child: Card(
+        color: Color.fromARGB(255, 111, 109, 109), // Black card
+        elevation: 8.0, // Elevation for shadow effect
+
         child: Row(
-          mainAxisSize: MainAxisSize.min, // Wraps the content tightly
           children: [
-            // Loading GIF (using SpinKitDoubleBounce as an example)
-            // SpinKitDoubleBounce(
-            //   color: Colors.white,  // Color of the loading animation
-            //   size: 50.0,           // Size of the loading animation
-            // ),
-            SizedBox(height: 20), // Space between the GIF and text
-            // Loading Text
+            Spacer(),
+            SpinKitDoubleBounce(
+              color: Colors.white, // Color of the loading animation
+              size: 18, // Size of the loading animation
+            ),
+            Spacer(),
             Text(
               'Loading...',
               style: TextStyle(
                 color: Colors.white, // White text color
-                fontSize: 18.0, // Font size of the text
+                fontSize: 18, // Font size of the text
                 fontWeight: FontWeight.bold,
               ),
             ),
+            Spacer(),
           ],
         ),
       ),
